@@ -163,14 +163,14 @@
         <div id="sub-text_display"></div>
         <p>
             <label for="">工程スケジュール</label>
-            <textarea name="" id="copyTarget1" cols="30" rows="7"></textarea>
+            <textarea name="" id="copyTarget1" cols="30" rows="7" onclick="clickAllAreaSelect(this)"></textarea>
             <button id="1" class="copyBtn" onclick="copyClipboard(this)">
                 コピー
             </button>
         </p>
         <p>
             <label for="">工程期限切れ・<br />終了日未定</label>
-            <textarea name="" id="copyTarget2" cols="30" rows="7"></textarea>
+            <textarea name="" id="copyTarget2" cols="30" rows="7" onclick="clickAllAreaSelect(this)"></textarea>
             <button id="2" class="copyBtn" onclick="copyClipboard(this)">
                 コピー
             </button>
@@ -178,35 +178,35 @@
         <h4>タスク状況</h4>
         <p>
             <label for="">全タスク数</label>
-            <textarea name="" id="copyTarget3" cols="30" rows="7"></textarea>
+            <textarea name="" id="copyTarget3" cols="30" rows="7" onclick="clickAllAreaSelect(this)"></textarea>
             <button id="3" class="copyBtn" onclick="copyClipboard(this)">
                 コピー
             </button>
         </p>
         <p>
             <label for="">予定完了数</label>
-            <textarea name="" id="copyTarget4" cols="30" rows="7"></textarea>
+            <textarea name="" id="copyTarget4" cols="30" rows="7" onclick="clickAllAreaSelect(this)"></textarea>
             <button id="4" class="copyBtn" onclick="copyClipboard(this)">
                 コピー
             </button>
         </p>
         <p>
             <label for="">実績完了数</label>
-            <textarea name="" id="copyTarget5" cols="30" rows="7"></textarea>
+            <textarea name="" id="copyTarget5" cols="30" rows="7" onclick="clickAllAreaSelect(this)"></textarea>
             <button id="5" class="copyBtn" onclick="copyClipboard(this)">
                 コピー
             </button>
         </p>
         <p>
             <label for="">終了日未設定</label>
-            <textarea name="" id="copyTarget6" cols="30" rows="7"></textarea>
+            <textarea name="" id="copyTarget6" cols="30" rows="7" onclick="clickAllAreaSelect(this)"></textarea>
             <button id="6" class="copyBtn" onclick="copyClipboard(this)">
                 コピー
             </button>
         </p>
         <p>
             <label for="">期限切れタスク数</label>
-            <textarea name="" id="copyTarget7" cols="30" rows="7"></textarea>
+            <textarea name="" id="copyTarget7" cols="30" rows="7" onclick="clickAllAreaSelect(this)"></textarea>
             <button id="7" class="copyBtn" onclick="copyClipboard(this)">
                 コピー
             </button>
@@ -277,49 +277,49 @@
         *構文比較【済】
         **/
         var Pro_Sche_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND issueFunction in issueFieldMatch(\"project = 10600 AND issuetype = 工程\", \"summary\", \"^【.+】[^_]+$\")ORDER BY labels ASC, summary ASC";
-        Pro_Sche.innerHTML = Pro_Sche_JQL;
+        Pro_Sche.value = Pro_Sche_JQL;
 
         /**
         *工程期限切れ・終了日未定のJQL生成
         *構文比較【済】
         **/
         var Exp_and_Emp_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic +  " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND issueFunction in issueFieldMatch(\"project = 10600 AND issuetype = 工程\", \"summary\", \"^【.+】[^_]+$\") AND  (\"終了日(WBSGantt)\" < now() OR \"終了日(WBSGantt)\" is EMPTY) AND status not in (クローズ, 解決済み)   ORDER BY labels ASC, summary ASC";
-        Exp_and_Emp.innerHTML = Exp_and_Emp_JQL;
+        Exp_and_Emp.value = Exp_and_Emp_JQL;
 
         /**
         *全タスク数のJQL生成
         *構文比較【済】
         **/
         var All_Tasks_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task)";
-        All_Tasks.innerHTML = All_Tasks_JQL;
+        All_Tasks.value = All_Tasks_JQL;
 
          /**
         *予定完了数のJQL生成
         *構文比較【済】
         **/
         var Prospects_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task) AND ((\"終了日(WBSGantt)\" is EMPTY AND status IN (解決済み,クローズ)  ) OR \"終了日(WBSGantt)\" <= now())";
-        Prospects.innerHTML = Prospects_JQL;
+        Prospects.value = Prospects_JQL;
 
         /**
         *実績完了数のJQL生成
         *構文比較【済】
         **/
         var Achievements_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task) AND status IN (解決済み,クローズ)";
-        Achievements.innerHTML = Achievements_JQL;
+        Achievements.value = Achievements_JQL;
 
         /**
         *終了日未設定のJQL生成
         *構文比較【済】
         **/
         var End_date_not_set_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task)  AND (\"終了日(WBSGantt)\" is EMPTY) AND status not in (クローズ, 解決済み)";
-        End_date_not_set.innerHTML = End_date_not_set_JQL;
+        End_date_not_set.value = End_date_not_set_JQL;
 
         /**
         *期限切れタスク数のJQL生成
         *構文比較【済】
         **/
         var Exp_Tasks_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task) AND (\"終了日(WBSGantt)\" < now()) AND status not in (クローズ, 解決済み)";
-        Exp_Tasks.innerHTML = Exp_Tasks_JQL;
+        Exp_Tasks.value = Exp_Tasks_JQL;
 
 　　　　//入力の無い項目は既存文字列としてセットする。 
         // そのほかアラートやクリア機能　またリロードしてもクリアされないようになどする。
@@ -327,6 +327,18 @@
         subText = document.getElementById("sub-text_display");
         subText.textContent = "JQLを生成しました。";
         subText.className = "show_msg";
+    }
+
+    /**
+    *テキストエリアをクリックすると全選択する。
+    *各テキストボックスにidを数値で割り振り、slice関数でcopyTargetを削り数値のみを連結することで1つの関数で引数{this}で対応できます。
+    @type{String} eleはtextareatタグの中身を取得しています。
+    **/
+    function clickAllAreaSelect(strNum) {
+        // 
+        id_strNum = strNum.id.slice(10);
+        var selectTargetText = document.getElementById( "copyTarget" + id_strNum );
+        selectTargetText.select();
     }
   </script>
 </html>
