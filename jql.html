@@ -1,0 +1,332 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+<style>
+    /* common style */
+    h1.title {
+        border-left: 8px solid blue;
+        padding-left: 15px;
+        margin-bottom: 10px;
+    }
+
+    /* input_box input css  & wrapper css*/
+    .wrapper {
+        width: 800px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .result_box,
+    .btn-area,
+    .input_box {
+        width: 700px;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+
+    .result_box,
+    .input_box {
+        border: 1px solid #aaa;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: #aaa 0 0 7px;
+        background: #fdffff;
+    }
+
+    .btn-area {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .input_box input[type="text"] {
+        width: 400px;
+        height: 40px;
+        padding: 8px;
+        border-radius: 4px;
+        /* box-shadow: 1px 1px #aaa; */
+    }
+
+    input {
+        border: 1px solid #ccc;
+    }
+
+    label {
+        margin-right: 10px;
+        width: 130px;
+        float: left;
+        padding: 8px;
+        text-align: end;
+    }
+
+    .required {
+        color: red;
+        font-size: 1rem;
+    }
+    .non_required{
+        opacity: 0;
+    }
+
+    .btn {
+        width: 180px;
+        height: 40px;
+        background-color: darkblue;
+        color: aliceblue;
+        font-size: 16px;
+    }
+
+    .btn:hover {
+        width: 180px;
+        height: 40px;
+        background-color: darkblue;
+        color: aliceblue;
+        font-size: 16px;
+        opacity: 0.8;
+    }
+
+    .underline_shape {
+        margin-top: 60px;
+        border-bottom: 1px solid cornflowerblue;
+        width: 100%;
+        opacity: 0.5;
+    }
+
+    .under {
+        width: 0;
+        height: 0;
+        border: 60px solid transparent;
+        border-top: 60px solid cornflowerblue;
+        margin: 0 auto;
+    }
+
+    /* result_box input css */
+    .result_box {
+        margin-top: -50px;
+    }
+
+    .result_box textarea {
+        width: 470px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    .show_msg {
+    transition: 1s;
+    background: #d1fdff;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: blue;
+    }
+
+    .copyBtn {
+    /* width: 50px; */
+    color: #f0f0f0;
+    background: blue;
+    border: 1px solid transparent;
+    box-shadow: 3px 3px #cacaca;
+    float: right;
+    margin-top: 45px;
+    }
+</style>
+
+<div class="wrapper">
+    <div class="input_box">
+        <div class="title">
+            <h1 class="title">項目の入力</h1>
+            JQLに指定する値をテキストボックスに入力して生成ボタンを押してください。<br />
+            <span class="required">*</span>の項目は必須項目です。
+        </div>
+        <p>
+            <label for="epic">エピックリンク<span class="required">*</span></label>
+            <input type="text" name="epic" id="epic" value="COREAIRRES-9089" placeholder="COREAIRRES-9089" />
+        </p>
+        <p>
+            <label for="summary1">サマリー1(要約)<span class="required">*</span></label>
+            <input type="text" name="summary1" id="summary1" value="【住：在庫集計バッチ不正店舗スキップ対応】" placeholder="【住：在庫集計バッチ不正店舗スキップ対応】 " />
+        </p>
+
+        <p>
+            <label for="summary2">サマリー2(要約)<span class="non_required">*</span></label>
+            <input type="text" name="summary2" id="summary2" value="【2019/06 定期リリース】" placeholder="" />
+        </p>
+        
+    </div>
+    <div class="btn-area">
+        <button class="btn" type="submit" value="create" onclick="createJQL();">JQL生成</button>
+    </div>
+    <div class="underline_shape"></div>
+    <div class="under"></div>
+    <div class="result_box">
+        <h1 class="title">項目の入力</h1>
+        <div id="sub-text_display"></div>
+        <p>
+            <label for="">工程スケジュール</label>
+            <textarea name="" id="copyTarget1" cols="30" rows="7"></textarea>
+            <button id="1" class="copyBtn" onclick="copyClipboard(this)">
+                コピー
+            </button>
+        </p>
+        <p>
+            <label for="">工程期限切れ・<br />終了日未定</label>
+            <textarea name="" id="copyTarget2" cols="30" rows="7"></textarea>
+            <button id="2" class="copyBtn" onclick="copyClipboard(this)">
+                コピー
+            </button>
+        </p>
+        <h4>タスク状況</h4>
+        <p>
+            <label for="">全タスク数</label>
+            <textarea name="" id="copyTarget3" cols="30" rows="7"></textarea>
+            <button id="3" class="copyBtn" onclick="copyClipboard(this)">
+                コピー
+            </button>
+        </p>
+        <p>
+            <label for="">予定完了数</label>
+            <textarea name="" id="copyTarget4" cols="30" rows="7"></textarea>
+            <button id="4" class="copyBtn" onclick="copyClipboard(this)">
+                コピー
+            </button>
+        </p>
+        <p>
+            <label for="">実績完了数</label>
+            <textarea name="" id="copyTarget5" cols="30" rows="7"></textarea>
+            <button id="5" class="copyBtn" onclick="copyClipboard(this)">
+                コピー
+            </button>
+        </p>
+        <p>
+            <label for="">終了日未設定</label>
+            <textarea name="" id="copyTarget6" cols="30" rows="7"></textarea>
+            <button id="6" class="copyBtn" onclick="copyClipboard(this)">
+                コピー
+            </button>
+        </p>
+        <p>
+            <label for="">期限切れタスク数</label>
+            <textarea name="" id="copyTarget7" cols="30" rows="7"></textarea>
+            <button id="7" class="copyBtn" onclick="copyClipboard(this)">
+                コピー
+            </button>
+        </p>
+    </div>
+</div>
+  </body>
+  <script>
+
+    /**
+    *生成したJQLをクリップボードにコピーします。
+    *各テキストボックスにidを数値で割り振り、文字列連結しています。
+    @type{String} eleはtextareatタグの中身を取得しています。
+    **/
+    function copyClipboard(ele) {
+      var targetId = ele.id;
+
+      var targetText = document.getElementById("copyTarget" + targetId);
+      targetText.select();
+      document.execCommand("Copy");
+    }
+
+    /**
+    *JQLインプット項目からを生成して表示します。
+    *@tyoe {String}
+    *summary2のデフォルト値は 文字列でsummaryです。
+    *JQLが元と正しいかの比較はhttps://difff.jp/　で行っています。
+    **/
+    function createJQL() {
+
+        // epic　summary1　summary2を取得
+        var epic = document.getElementById("epic").value;
+        var summary1 = document.getElementById( "summary1" ).value;
+        var summary2 = document.getElementById( "summary2" ).value || "summary";
+
+        epic = epic.trim();
+        summary1 = summary1.trim();
+
+        if (epic === "" ) {
+            alert("エピックリンクが入力されていません");
+            return;
+        }
+        if ( summary1 === "" ) {
+            alert( "サマリー1が入力されていません" );
+            return;
+        }
+ 
+        // JQL一覧の項目を取得
+        var Pro_Sche = document.getElementById("copyTarget1");
+        var Exp_and_Emp = document.getElementById( "copyTarget2" );
+        var All_Tasks = document.getElementById( "copyTarget3" );
+        var Prospects = document.getElementById( "copyTarget4" );
+        var Achievements = document.getElementById( "copyTarget5" );
+        var End_date_not_set = document.getElementById( "copyTarget6" );
+        var Exp_Tasks = document.getElementById( "copyTarget7" );
+
+        // 各JQLの構文保存
+
+        /*
+        *比較用テキスト
+        *COREAIRRES-9089
+        *【住：在庫集計バッチ不正店舗スキップ対応】
+        *【2019/06 定期リリース】
+        */
+
+        /**
+        *工程スケジュールのJQL生成
+        *構文比較【済】
+        **/
+        var Pro_Sche_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND issueFunction in issueFieldMatch(\"project = 10600 AND issuetype = 工程\", \"summary\", \"^【.+】[^_]+$\")ORDER BY labels ASC, summary ASC";
+        Pro_Sche.innerHTML = Pro_Sche_JQL;
+
+        /**
+        *工程期限切れ・終了日未定のJQL生成
+        *構文比較【済】
+        **/
+        var Exp_and_Emp_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic +  " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND issueFunction in issueFieldMatch(\"project = 10600 AND issuetype = 工程\", \"summary\", \"^【.+】[^_]+$\") AND  (\"終了日(WBSGantt)\" < now() OR \"終了日(WBSGantt)\" is EMPTY) AND status not in (クローズ, 解決済み)   ORDER BY labels ASC, summary ASC";
+        Exp_and_Emp.innerHTML = Exp_and_Emp_JQL;
+
+        /**
+        *全タスク数のJQL生成
+        *構文比較【済】
+        **/
+        var All_Tasks_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task)";
+        All_Tasks.innerHTML = All_Tasks_JQL;
+
+         /**
+        *予定完了数のJQL生成
+        *構文比較【済】
+        **/
+        var Prospects_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task) AND ((\"終了日(WBSGantt)\" is EMPTY AND status IN (解決済み,クローズ)  ) OR \"終了日(WBSGantt)\" <= now())";
+        Prospects.innerHTML = Prospects_JQL;
+
+        /**
+        *実績完了数のJQL生成
+        *構文比較【済】
+        **/
+        var Achievements_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task) AND status IN (解決済み,クローズ)";
+        Achievements.innerHTML = Achievements_JQL;
+
+        /**
+        *終了日未設定のJQL生成
+        *構文比較【済】
+        **/
+        var End_date_not_set_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task)  AND (\"終了日(WBSGantt)\" is EMPTY) AND status not in (クローズ, 解決済み)";
+        End_date_not_set.innerHTML = End_date_not_set_JQL;
+
+        /**
+        *期限切れタスク数のJQL生成
+        *構文比較【済】
+        **/
+        var Exp_Tasks_JQL = "project = 10600 AND (\"エピック リンク\" = " + epic + " OR summary ~ " + summary1 + " OR summary ~ " + "\"" + summary2 + "\"" + ") AND  issuetype in (Task, Sub-task) AND (\"終了日(WBSGantt)\" < now()) AND status not in (クローズ, 解決済み)";
+        Exp_Tasks.innerHTML = Exp_Tasks_JQL;
+
+　　　　//入力の無い項目は既存文字列としてセットする。 
+        // そのほかアラートやクリア機能　またリロードしてもクリアされないようになどする。
+    
+        subText = document.getElementById("sub-text_display");
+        subText.textContent = "JQLを生成しました。";
+        subText.className = "show_msg";
+    }
+  </script>
+</html>
